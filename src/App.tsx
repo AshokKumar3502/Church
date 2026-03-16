@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { toPng } from 'html-to-image';
 import { Download, RefreshCw, MapPin, Phone, Palette } from 'lucide-react';
 import { cn } from './lib/utils';
@@ -11,6 +11,22 @@ export default function App() {
   const posterRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [scale, setScale] = useState(1);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const updateScale = () => {
+      if (previewContainerRef.current) {
+        const containerWidth = previewContainerRef.current.offsetWidth;
+        const newScale = Math.min(containerWidth / 1080, 1);
+        setScale(newScale);
+      }
+    };
+
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -44,7 +60,7 @@ export default function App() {
         cacheBust: true,
       });
       const link = document.createElement('a');
-      link.download = `ZionChurch_${data.day}${data.month}${data.year}.png`;
+      link.download = `SiyonuSamajaMandhiram_${data.day}${data.month}${data.year}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -78,7 +94,7 @@ export default function App() {
       <div className="flex-1 flex flex-col justify-between p-20 z-20">
         <div className="space-y-8">
           <div className="space-y-2">
-            <div className="font-display text-lg tracking-[0.5em] whitespace-nowrap" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+            <div className="font-display text-lg tracking-[0.5em] whitespace-nowrap" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
             <div className="font-telugu text-3xl font-bold tracking-wider whitespace-nowrap" style={{ color: currentTheme.colors.text }}>సీయోను సమాజ మందిరం</div>
           </div>
           
@@ -144,7 +160,7 @@ export default function App() {
 
       <div className="w-full flex flex-col items-center gap-12">
         <div className="text-center space-y-4">
-          <div className="font-display text-2xl tracking-[0.8em] whitespace-nowrap" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+          <div className="font-display text-2xl tracking-[0.8em] whitespace-nowrap" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="font-telugu text-4xl font-black tracking-[0.2em] whitespace-nowrap" style={{ color: currentTheme.colors.text }}>సీయోను సమాజ మందిరం</div>
         </div>
 
@@ -197,7 +213,7 @@ export default function App() {
       {/* Top Section */}
       <div className="w-full flex flex-col items-center gap-6">
         <div className="flex flex-col items-center gap-2">
-          <div className="font-display text-base tracking-[0.6em] whitespace-nowrap" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+          <div className="font-display text-base tracking-[0.6em] whitespace-nowrap" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="w-64 h-[1px] relative" style={{ background: `linear-gradient(to r, transparent, ${currentTheme.colors.accent}, transparent)` }}>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 w-2 h-2" style={{ background: currentTheme.colors.accent }} />
           </div>
@@ -254,7 +270,7 @@ export default function App() {
     <div className="w-full h-full flex flex-col p-24 z-20">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <div className="font-display text-sm tracking-[0.4em]" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+          <div className="font-display text-sm tracking-[0.4em]" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="font-telugu text-xl font-medium whitespace-nowrap" style={{ color: currentTheme.colors.text }}>సీయోను సమాజ మందిరం</div>
         </div>
         <div className="text-right">
@@ -303,7 +319,7 @@ export default function App() {
     <div className="w-full h-full flex flex-col items-center justify-center p-20 z-20">
       <div className="w-full h-full backdrop-blur-md bg-white/5 rounded-[40px] border border-white/10 shadow-2xl flex flex-col overflow-hidden">
         <div className="h-24 flex items-center justify-between px-12 border-b border-white/10">
-          <div className="font-display text-lg tracking-[0.4em]" style={{ color: currentTheme.colors.accent }}>ZION CHURCH</div>
+          <div className="font-display text-lg tracking-[0.4em]" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-full overflow-hidden border-2" style={{ borderColor: currentTheme.colors.accent }}>
               <img src={pastorImage} className="w-full h-full object-cover" alt="Pastor" />
@@ -343,7 +359,7 @@ export default function App() {
     <div className="w-full h-full flex flex-col p-12 z-20">
       <div className="grid grid-cols-4 grid-rows-4 gap-4 w-full h-full">
         <div className="col-span-3 border-4 p-8 flex flex-col justify-between" style={{ borderColor: currentTheme.colors.accent, backgroundColor: `${currentTheme.colors.accent}10` }}>
-          <div className="font-display text-2xl font-black tracking-tighter" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+          <div className="font-display text-2xl font-black tracking-tighter" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="font-telugu text-7xl font-black leading-none" style={{ color: currentTheme.colors.text }}>
             {renderTeluguVerse()}
           </div>
@@ -385,7 +401,7 @@ export default function App() {
         ))}
 
         <div className="text-center space-y-2">
-          <div className="font-display text-xl tracking-[0.4em] font-bold" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+          <div className="font-display text-xl tracking-[0.4em] font-bold" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="font-telugu text-2xl opacity-80 whitespace-nowrap" style={{ color: currentTheme.colors.text }}>సీయోను సమాజ మందిరం</div>
         </div>
 
@@ -425,7 +441,7 @@ export default function App() {
   const AsymmetricLayout = () => (
     <div className="w-full h-full grid grid-cols-12 grid-rows-12 gap-0 z-20">
       <div className="col-span-7 row-span-8 p-20 flex flex-col justify-center gap-8">
-        <div className="font-display text-sm tracking-[0.5em] opacity-50" style={{ color: currentTheme.colors.text }}>ZION COMMUNITY CHURCH</div>
+        <div className="font-display text-sm tracking-[0.5em] opacity-50" style={{ color: currentTheme.colors.text }}>SIYONU SAMAJA MANDHIRAM</div>
         <div className="font-telugu text-6xl font-black leading-tight" style={{ color: currentTheme.colors.text }}>
           {renderTeluguVerse()}
         </div>
@@ -471,7 +487,7 @@ export default function App() {
       <div className="relative h-full flex flex-col justify-between p-24">
         <div className="flex justify-between items-start">
           <div className="space-y-2">
-            <div className="font-display text-xl tracking-[0.6em] font-bold" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+            <div className="font-display text-xl tracking-[0.6em] font-bold" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
             <div className="font-telugu text-2xl opacity-80 whitespace-nowrap" style={{ color: 'white' }}>సీయోను సమాజ మందిరం</div>
           </div>
           <div className="text-right">
@@ -518,7 +534,7 @@ export default function App() {
     <div className="w-full h-full p-12 z-20">
       <div className="w-full h-full grid grid-cols-3 grid-rows-3 gap-6">
         <div className="col-span-2 row-span-1 bg-white/5 border border-white/10 p-10 flex flex-col justify-center">
-          <div className="font-display text-lg tracking-[0.5em] mb-2" style={{ color: currentTheme.colors.accent }}>ZION COMMUNITY CHURCH</div>
+          <div className="font-display text-lg tracking-[0.5em] mb-2" style={{ color: currentTheme.colors.accent }}>SIYONU SAMAJA MANDHIRAM</div>
           <div className="font-telugu text-3xl font-black whitespace-nowrap" style={{ color: currentTheme.colors.text }}>సీయోను సమాజ మందిరం</div>
         </div>
         <div className="col-span-1 row-span-1 bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-2">
@@ -556,9 +572,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen p-4 md:p-8 flex flex-col items-center gap-8 bg-zinc-950 text-white">
-      <div className="w-full max-w-5xl bg-zinc-900/80 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-2xl">
-        <h1 className="font-display text-2xl text-gold-bright text-center tracking-widest mb-6 border-b border-white/10 pb-4">
-          ✦ ZION POSTER STUDIO ✦
+      <div className="w-full max-w-5xl bg-zinc-900/80 border border-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-md shadow-2xl">
+        <h1 className="font-display text-xl sm:text-2xl text-gold-bright text-center tracking-[0.2em] sm:tracking-widest mb-6 border-b border-white/10 pb-4 flex items-center justify-center gap-3">
+          <span className="hidden sm:inline">✦</span> 
+          SIYONU POSTER STUDIO 
+          <span className="hidden sm:inline">✦</span>
         </h1>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -606,18 +624,18 @@ export default function App() {
 
           {/* Right Column: Meta Info */}
           <div className="space-y-6">
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] uppercase tracking-widest text-gold-muted font-display">Day</label>
-                <input name="day" value={data.day} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-center text-sm" />
+                <input name="day" value={data.day} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-center text-sm focus:border-gold-bright outline-none" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase tracking-widest text-gold-muted font-display">Month</label>
-                <input name="month" value={data.month} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-center text-sm" />
+                <input name="month" value={data.month} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-center text-sm focus:border-gold-bright outline-none" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase tracking-widest text-gold-muted font-display">Year</label>
-                <input name="year" value={data.year} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-center text-sm" />
+                <input name="year" value={data.year} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-center text-sm focus:border-gold-bright outline-none" />
               </div>
             </div>
             
@@ -651,21 +669,37 @@ export default function App() {
             <input name="churchAddress" value={data.churchAddress} onChange={handleInputChange} className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-sm" />
           </div>
           <div className="flex justify-center pt-4">
-            <button onClick={downloadPoster} disabled={isExporting} className="group relative flex items-center gap-3 bg-gradient-to-br from-gold-muted to-gold-bright text-black font-display font-bold py-4 px-12 rounded-xl hover:scale-105 transition-all shadow-[0_0_20px_rgba(240,192,96,0.3)] disabled:opacity-50">
+            <button 
+              onClick={downloadPoster} 
+              disabled={isExporting} 
+              className="group relative flex items-center justify-center gap-3 bg-gradient-to-br from-gold-muted to-gold-bright text-black font-display font-bold py-3 px-6 sm:py-4 sm:px-12 rounded-xl hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(240,192,96,0.3)] disabled:opacity-50 w-full sm:w-auto text-xs sm:text-base"
+            >
               {isExporting ? <RefreshCw className="animate-spin" /> : <Download size={20} />}
               {isExporting ? "PREPARING..." : "EXPORT POSTER (4K PNG)"}
             </button>
           </div>
         </div>
-      </div>
 
       {/* Poster Preview Area */}
-      <div className="relative overflow-auto w-full flex justify-center pb-20">
+      <div className="w-full max-w-5xl flex flex-col items-center gap-4 pb-20">
+        <div className="flex items-center gap-2 text-gold-muted font-display text-[10px] uppercase tracking-[0.2em]">
+          <div className="w-2 h-2 rounded-full bg-gold-bright animate-pulse" />
+          Live Preview
+        </div>
+        
         <div 
-          ref={posterRef} 
-          className={cn("w-[1080px] h-[1080px] relative overflow-hidden flex flex-col items-center shadow-2xl shrink-0 bg-black")}
-          style={{ fontFamily: '"Inter", "Noto Sans Telugu", sans-serif' }}
+          ref={previewContainerRef}
+          className="w-full relative flex justify-center items-start overflow-hidden rounded-xl shadow-2xl border border-white/5"
+          style={{ height: `${1080 * scale}px` }}
         >
+          <div 
+            ref={posterRef} 
+            className={cn("w-[1080px] h-[1080px] relative overflow-hidden flex flex-col items-center shrink-0 bg-black origin-top")}
+            style={{ 
+              fontFamily: '"Inter", "Noto Sans Telugu", sans-serif',
+              transform: `scale(${scale})`
+            }}
+          >
           {/* Dynamic Background Layers */}
           <div className={cn("absolute inset-0 bg-gradient-to-br transition-colors duration-700", currentTheme.colors.bg)} />
           
@@ -706,5 +740,7 @@ export default function App() {
         </div>
       </div>
     </div>
+    </div>
+  </div>
   );
 }
