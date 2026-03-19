@@ -10,8 +10,18 @@ export const DEFAULT_POSTER_DATA = {
   year: "2026",
   pastorName: "పాస్టర్. Y. సిలువ రాజు గారు",
   phone: "9908458227",
-  churchAddress: "సీయోను సమాజ మందిరం, వెల్లంకి, జూజూరు రోడ్"
+  churchName: "SIYONU SAMAJA MANDHIRAM",
+  churchNameTelugu: "సీయోను సమాజ మందిరం",
+  churchAddress: "సీయోను సమాజ మందిరం, వెల్లంకి, జుజ్జూరు రోడ్"
 };
+
+export const MONTHS = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+];
+
+export const DAYS = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
+export const YEARS = ["2024", "2025", "2026", "2027", "2028"];
 
 export const THEMES = [
   {
@@ -132,6 +142,246 @@ export const THEMES = [
       accentMuted: '#64748b',
       text: '#f8fafc',
       glow: 'rgba(148, 163, 184, 0.3)',
+    }
+  },
+  {
+    id: 'royal-purple',
+    name: 'Royal Purple',
+    layout: 'royal',
+    colors: {
+      bg: 'from-[#2e1065] via-[#1e1b4b] to-[#0f172a]',
+      accent: '#a855f7',
+      accentMuted: '#7e22ce',
+      text: '#faf5ff',
+      glow: 'rgba(168, 85, 247, 0.5)',
+    }
+  },
+  {
+    id: 'ocean-breeze',
+    name: 'Ocean Breeze',
+    layout: 'ocean',
+    colors: {
+      bg: 'from-[#083344] via-[#155e75] to-[#083344]',
+      accent: '#22d3ee',
+      accentMuted: '#0891b2',
+      text: '#ecfeff',
+      glow: 'rgba(34, 211, 238, 0.5)',
+    }
+  },
+  {
+    id: 'sunset-glow',
+    name: 'Sunset Glow',
+    layout: 'sunset',
+    colors: {
+      bg: 'from-[#451a03] via-[#78350f] to-[#451a03]',
+      accent: '#fbbf24',
+      accentMuted: '#d97706',
+      text: '#fffbeb',
+      glow: 'rgba(251, 191, 36, 0.5)',
+    }
+  },
+  {
+    id: 'forest-mist',
+    name: 'Forest Mist',
+    layout: 'forest',
+    colors: {
+      bg: 'from-[#064e3b] via-[#065f46] to-[#064e3b]',
+      accent: '#34d399',
+      accentMuted: '#059669',
+      text: '#ecfdf5',
+      glow: 'rgba(52, 211, 153, 0.5)',
+    }
+  },
+  {
+    id: 'midnight-neon',
+    name: 'Midnight Neon',
+    layout: 'neon',
+    colors: {
+      bg: 'from-[#000000] via-[#020617] to-[#000000]',
+      accent: '#f472b6',
+      accentMuted: '#db2777',
+      text: '#fdf2f8',
+      glow: 'rgba(244, 114, 182, 0.7)',
+    }
+  },
+  {
+    id: 'earthy-clay',
+    name: 'Earthy Clay',
+    layout: 'earthy',
+    colors: {
+      bg: 'from-[#431407] via-[#7c2d12] to-[#431407]',
+      accent: '#fb923c',
+      accentMuted: '#ea580c',
+      text: '#fff7ed',
+      glow: 'rgba(251, 146, 60, 0.5)',
+    }
+  },
+  {
+    id: 'slate-modern',
+    name: 'Slate Modern',
+    layout: 'slate',
+    colors: {
+      bg: 'from-[#020617] via-[#1e293b] to-[#020617]',
+      accent: '#38bdf8',
+      accentMuted: '#0284c7',
+      text: '#f0f9ff',
+      glow: 'rgba(56, 189, 248, 0.5)',
+    }
+  },
+  {
+    id: 'rose-gold',
+    name: 'Rose Gold',
+    layout: 'rose',
+    colors: {
+      bg: 'from-[#2d1a1a] via-[#451a1a] to-[#2d1a1a]',
+      accent: '#fda4af',
+      accentMuted: '#f43f5e',
+      text: '#fff1f2',
+      glow: 'rgba(253, 164, 175, 0.5)',
+    }
+  },
+  {
+    id: 'amber-classic',
+    name: 'Amber Classic',
+    layout: 'amber',
+    colors: {
+      bg: 'from-[#451a03] via-[#92400e] to-[#451a03]',
+      accent: '#fcd34d',
+      accentMuted: '#f59e0b',
+      text: '#fffbeb',
+      glow: 'rgba(252, 211, 77, 0.5)',
+    }
+  },
+  {
+    id: 'deep-teal',
+    name: 'Deep Teal',
+    layout: 'teal',
+    colors: {
+      bg: 'from-[#042f2e] via-[#134e4a] to-[#042f2e]',
+      accent: '#2dd4bf',
+      accentMuted: '#0d9488',
+      text: '#f0fdfa',
+      glow: 'rgba(45, 212, 191, 0.5)',
+    }
+  },
+  {
+    id: 'cyber-neon',
+    name: 'Cyber Neon',
+    layout: 'cyberpunk',
+    colors: {
+      bg: 'from-[#050505] via-[#1a0033] to-[#050505]',
+      accent: '#00f2ff',
+      accentMuted: '#7000ff',
+      text: '#ffffff',
+      glow: 'rgba(0, 242, 255, 0.6)',
+    }
+  },
+  {
+    id: 'mono-bold',
+    name: 'Mono Bold',
+    layout: 'monochrome',
+    colors: {
+      bg: 'from-[#000000] via-[#111111] to-[#000000]',
+      accent: '#ffffff',
+      accentMuted: '#444444',
+      text: '#ffffff',
+      glow: 'rgba(255, 255, 255, 0.3)',
+    }
+  },
+  {
+    id: 'aged-paper',
+    name: 'Aged Paper',
+    layout: 'paper',
+    colors: {
+      bg: 'from-[#f4e4bc] via-[#e8d5a7] to-[#f4e4bc]',
+      accent: '#5d4037',
+      accentMuted: '#8d6e63',
+      text: '#2c1810',
+      glow: 'rgba(93, 64, 55, 0.2)',
+    }
+  },
+  {
+    id: 'modern-geo',
+    name: 'Modern Geo',
+    layout: 'modernist',
+    colors: {
+      bg: 'from-[#f8f9fa] to-[#e9ecef]',
+      accent: '#007bff',
+      accentMuted: '#6c757d',
+      text: '#212529',
+      glow: 'rgba(0, 123, 255, 0.2)',
+    }
+  },
+  {
+    id: 'botanical-leaf',
+    name: 'Botanical Leaf',
+    layout: 'botanical',
+    colors: {
+      bg: 'from-[#f1f8e9] via-[#dcedc8] to-[#f1f8e9]',
+      accent: '#33691e',
+      accentMuted: '#689f38',
+      text: '#1b5e20',
+      glow: 'rgba(51, 105, 30, 0.2)',
+    }
+  },
+  {
+    id: 'arch-blueprint',
+    name: 'Arch Blueprint',
+    layout: 'architectural',
+    colors: {
+      bg: 'from-[#0d47a1] via-[#1565c0] to-[#0d47a1]',
+      accent: '#ffffff',
+      accentMuted: '#bbdefb',
+      text: '#ffffff',
+      glow: 'rgba(255, 255, 255, 0.4)',
+    }
+  },
+  {
+    id: 'celestial-night',
+    name: 'Celestial Night',
+    layout: 'celestial',
+    colors: {
+      bg: 'from-[#0a0a2e] via-[#1a1a4a] to-[#0a0a2e]',
+      accent: '#ffd700',
+      accentMuted: '#c0c0c0',
+      text: '#ffffff',
+      glow: 'rgba(255, 215, 0, 0.6)',
+    }
+  },
+  {
+    id: 'retro-wave',
+    name: 'Retro Wave',
+    layout: 'retro',
+    colors: {
+      bg: 'from-[#2b0057] via-[#ff0055] to-[#2b0057]',
+      accent: '#00fff2',
+      accentMuted: '#ff00ff',
+      text: '#ffffff',
+      glow: 'rgba(0, 255, 242, 0.6)',
+    }
+  },
+  {
+    id: 'zen-minimal',
+    name: 'Zen Minimal',
+    layout: 'zen',
+    colors: {
+      bg: 'from-[#fafafa] to-[#f0f0f0]',
+      accent: '#262626',
+      accentMuted: '#737373',
+      text: '#171717',
+      glow: 'rgba(0, 0, 0, 0.05)',
+    }
+  },
+  {
+    id: 'industrial-steel',
+    name: 'Industrial Steel',
+    layout: 'industrial',
+    colors: {
+      bg: 'from-[#262626] via-[#404040] to-[#262626]',
+      accent: '#fbbf24',
+      accentMuted: '#737373',
+      text: '#f5f5f5',
+      glow: 'rgba(251, 191, 36, 0.4)',
     }
   }
 ];
