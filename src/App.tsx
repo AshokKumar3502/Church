@@ -8,7 +8,10 @@ import { getVerseForDay } from './data/dailyVerses';
 function App() {
   const [data, setData] = useState({
     ...DEFAULT_POSTER_DATA,
-    teluguFontSize: 60
+    teluguFontSize: 60,
+    pastorImageScale: 1,
+    pastorImageX: 0,
+    pastorImageY: 0
   });
   const [pastorImage, setPastorImage] = useState(DEFAULT_PASTOR_IMAGE);
   const [currentTheme, setCurrentTheme] = useState(THEMES[0]);
@@ -43,6 +46,11 @@ function App() {
       dayOfYear += daysInMonths[i];
     }
     return dayOfYear;
+  };
+
+  const pastorImageStyle = {
+    transform: `scale(${data.pastorImageScale}) translate(${data.pastorImageX}px, ${data.pastorImageY}px)`,
+    transition: 'transform 0.1s ease-out'
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -130,7 +138,7 @@ function App() {
           <div className="font-telugu text-4xl font-bold tracking-wider" style={{ color: currentTheme.colors.text }}>{data.churchNameTelugu}</div>
         </div>
         <div className="relative w-[450px] h-[500px] rounded-2xl overflow-hidden border-4 shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
           <div className="absolute bottom-8 left-0 w-full text-center">
             <div className="inline-block border-b-2 px-8 py-3" style={{ borderColor: currentTheme.colors.accent }}>
@@ -189,7 +197,7 @@ function App() {
         <div className="relative group">
           <div className="absolute inset-[-30px] border-2 rounded-full opacity-20 animate-pulse" style={{ borderColor: currentTheme.colors.accent }} />
           <div className="w-[450px] h-[450px] rounded-full overflow-hidden border-4 shadow-2xl relative z-10" style={{ borderColor: currentTheme.colors.accent }}>
-            <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
           </div>
           <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black border-2 px-8 py-3 rounded-xl z-20 shadow-2xl whitespace-nowrap" style={{ borderColor: currentTheme.colors.accent }}>
             <span className="font-telugu text-3xl font-black tracking-wider" style={{ color: currentTheme.colors.accent }}>{data.pastorName}</span>
@@ -245,7 +253,7 @@ function App() {
             <div className="font-display text-3xl tracking-[0.6em] font-black uppercase drop-shadow-lg" style={{ color: currentTheme.colors.text }}>{data.month} {data.year}</div>
           </div>
           <div className="relative w-[280px] h-[280px] rounded-full overflow-hidden border-[6px] shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-            <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
           </div>
           <div className="font-telugu text-3xl font-black drop-shadow-xl" style={{ color: currentTheme.colors.accent }}>{data.pastorName}</div>
         </div>
@@ -302,7 +310,7 @@ function App() {
         </div>
         <div className="flex flex-col items-center gap-8">
           <div className="w-32 h-32 rounded-[25px] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 border-2 border-black/5 shadow-2xl">
-            <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
           </div>
           <div className="space-y-2">
             <div className="font-display text-lg tracking-widest uppercase opacity-40 font-black" style={{ color: currentTheme.colors.text }}>Senior Pastor</div>
@@ -334,7 +342,7 @@ function App() {
             <div className="font-telugu text-2xl font-black opacity-90 drop-shadow-xl" style={{ color: currentTheme.colors.text }}>{data.churchNameTelugu}</div>
           </div>
           <div className="w-28 h-28 rounded-xl overflow-hidden border-[2px] shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-            <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
           </div>
         </div>
         <div className="space-y-10 relative z-10 items-center">
@@ -376,7 +384,7 @@ function App() {
             <div className="font-telugu text-3xl font-black tracking-widest uppercase mt-3">{data.churchNameTelugu}</div>
           </div>
           <div className="w-48 h-48 border-[10px] bg-black shadow-[10px_10px_0_rgba(0,0,0,0.5)]" style={{ borderColor: currentTheme.colors.accent }}>
-            <img src={pastorImage} className="w-full h-full object-cover object-center grayscale contrast-150" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center grayscale contrast-150" style={pastorImageStyle} alt="Pastor" />
           </div>
         </div>
         <div className="flex-1 flex flex-col justify-center gap-16 mt-16 items-center w-full">
@@ -418,7 +426,7 @@ function App() {
         <div className="relative">
           <div className="absolute inset-0 border-[6px] -m-6 rotate-3" style={{ borderColor: currentTheme.colors.accent }} />
           <div className="w-80 h-80 overflow-hidden border-[6px] shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-            <img src={pastorImage} className="w-full h-full object-cover object-center sepia" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center sepia" style={pastorImageStyle} alt="Pastor" />
           </div>
         </div>
         <div className="text-center space-y-8">
@@ -444,7 +452,7 @@ function App() {
   const AsymmetricLayout = () => (
     <div className="w-full h-full flex flex-col z-20 relative text-center">
       <div className="h-[40%] relative overflow-hidden">
-        <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+        <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
       <div className="flex-1 flex flex-col justify-between p-12 bg-black/20 backdrop-blur-sm items-center">
@@ -481,7 +489,7 @@ function App() {
   const HeroLayout = () => (
     <div className="w-full h-full flex flex-col z-20 relative text-center">
       <div className="h-[55%] relative overflow-hidden">
-        <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+        <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         <div className="absolute bottom-12 left-12 right-12 space-y-6 text-center">
           <div className="font-display text-2xl tracking-[0.6em]" style={{ color: currentTheme.colors.accent }}>{data.churchName}</div>
@@ -521,7 +529,7 @@ function App() {
           <div className="font-display text-2xl tracking-widest uppercase" style={{ color: currentTheme.colors.text }}>{data.month} {data.year}</div>
         </div>
         <div className="relative overflow-hidden border-[6px]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
       </div>
       <div className="flex-1 border-[6px] p-10 flex flex-col justify-center gap-8 items-center" style={{ borderColor: currentTheme.colors.accent }}>
@@ -550,7 +558,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-12">
         <div className="w-80 h-80 rounded-full overflow-hidden border-[10px] shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="text-center space-y-8">
           <div className="font-telugu font-black leading-tight break-words" style={{ color: currentTheme.colors.text, fontSize: `${data.teluguFontSize}px` }}>{renderTeluguVerse()}</div>
@@ -579,7 +587,7 @@ function App() {
           <div className="font-telugu text-2xl opacity-80" style={{ color: currentTheme.colors.text }}>{data.churchNameTelugu}</div>
         </div>
         <div className="w-48 h-48 rounded-2xl overflow-hidden border-[6px]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
       </div>
       <div className="space-y-10 w-full">
@@ -610,7 +618,7 @@ function App() {
         <div className="font-telugu text-4xl opacity-80" style={{ color: currentTheme.colors.text }}>{data.churchNameTelugu}</div>
       </div>
       <div className="relative w-80 h-80 rounded-full overflow-hidden border-[10px] shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-        <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+        <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       </div>
       <div className="text-center space-y-10">
@@ -637,7 +645,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-10 w-full">
         <div className="w-64 h-80 rounded-[40px] overflow-hidden shadow-2xl">
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="space-y-6 w-full">
           <div className="font-telugu font-black leading-tight break-words" style={{ color: currentTheme.colors.text, fontSize: `${data.teluguFontSize}px` }}>{renderTeluguVerse()}</div>
@@ -669,7 +677,7 @@ function App() {
       <div className="relative">
         <div className="absolute inset-0 rounded-full blur-3xl opacity-50" style={{ backgroundColor: currentTheme.colors.accent }} />
         <div className="w-80 h-80 rounded-full overflow-hidden border-[6px] relative z-10" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
       </div>
       <div className="space-y-10">
@@ -700,7 +708,7 @@ function App() {
         <div className="font-display text-2xl tracking-widest" style={{ color: currentTheme.colors.accent }}>{data.scriptureReference}</div>
         <div className="font-telugu font-black leading-tight break-words" style={{ color: currentTheme.colors.text, fontSize: `${data.teluguFontSize}px` }}>{renderTeluguVerse()}</div>
         <div className="w-full h-96 rounded-[40px] overflow-hidden border-[6px]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="font-serif text-3xl italic opacity-60 mx-auto max-w-[90%]" style={{ color: currentTheme.colors.text }}>{data.englishVerse}</div>
       </div>
@@ -735,7 +743,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-10 w-full">
         <div className="w-48 h-48 rounded-full overflow-hidden border-[6px]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="space-y-6 w-full">
           <div className="space-y-4">
@@ -755,7 +763,7 @@ function App() {
         <div className="font-telugu text-4xl font-bold" style={{ color: currentTheme.colors.text }}>{data.churchNameTelugu}</div>
       </div>
       <div className="w-80 h-[450px] rounded-[50px] overflow-hidden border-[6px] shadow-2xl" style={{ borderColor: currentTheme.colors.accent }}>
-        <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+        <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
       </div>
       <div className="space-y-8">
         <div className="font-display text-2xl tracking-widest" style={{ color: currentTheme.colors.accent }}>{data.scriptureReference}</div>
@@ -778,7 +786,7 @@ function App() {
       <div className="flex flex-col items-center gap-10 w-full">
         <div className="font-display text-[10rem] font-black leading-none" style={{ color: currentTheme.colors.accent }}>{data.day}</div>
         <div className="w-48 h-48 rounded-full overflow-hidden border-[6px]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover" style={pastorImageStyle} alt="Pastor" />
         </div>
       </div>
       <div className="space-y-10 w-full">
@@ -816,7 +824,7 @@ function App() {
         </div>
         <div className="flex flex-col items-center gap-10">
           <div className="w-full h-80 rounded-3xl overflow-hidden shadow-2xl">
-            <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
           </div>
           <div className="font-serif text-3xl italic opacity-60 mx-auto max-w-[90%]" style={{ color: currentTheme.colors.text }}>{data.englishVerse}</div>
         </div>
@@ -858,7 +866,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-12 w-full">
         <div className="w-96 h-96 border-[10px] overflow-hidden" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale contrast-125" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale contrast-125" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="space-y-8 w-full">
           <div className="space-y-6">
@@ -880,7 +888,7 @@ function App() {
       </div>
       <div className="flex-1 flex flex-col justify-center gap-16 w-full items-center">
         <div className="w-48 h-48 rounded-2xl overflow-hidden border-4 mb-8" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="font-telugu font-black leading-none tracking-tighter break-words" style={{ fontSize: `${data.teluguFontSize}px` }}>
           {renderTeluguVerse()}
@@ -916,7 +924,7 @@ function App() {
       <div className="flex-1 flex flex-col justify-center gap-16 relative z-10 w-full items-center">
         <div className="flex flex-col items-center gap-10">
           <div className="w-80 h-80 rounded-3xl overflow-hidden border-[6px] shadow-2xl rotate-[-2deg]" style={{ borderColor: currentTheme.colors.accent }}>
-            <img src={pastorImage} className="w-full h-full object-cover object-center sepia-[0.5]" alt="Pastor" />
+            <img src={pastorImage} className="w-full h-full object-cover object-center sepia-[0.5]" style={pastorImageStyle} alt="Pastor" />
           </div>
           <div className="space-y-6">
             <div className="font-display text-[10rem] font-black leading-none" style={{ color: currentTheme.colors.accent }}>{data.day}</div>
@@ -964,7 +972,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-10 w-full">
         <div className="w-56 h-56 bg-gray-100 overflow-hidden">
-          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="space-y-6 w-full">
           <div className="space-y-4">
@@ -990,7 +998,7 @@ function App() {
           </svg>
         </div>
         <div className="w-80 h-[450px] rounded-full overflow-hidden border-[6px] shadow-2xl relative z-10" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
       </div>
       <div className="space-y-10 w-full">
@@ -1032,7 +1040,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-10 relative z-10 w-full">
         <div className="w-full h-80 bg-white/5 border-[3px] p-3" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="flex flex-col items-center gap-8 w-full">
           <div className="text-center">
@@ -1059,7 +1067,7 @@ function App() {
       <div className="relative">
         <div className="absolute inset-0 rounded-full blur-3xl opacity-30 animate-pulse" style={{ backgroundColor: currentTheme.colors.accent }} />
         <div className="w-80 h-80 rounded-full overflow-hidden border-[6px] relative z-10 shadow-[0_0_60px_rgba(255,215,0,0.3)]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
       </div>
       <div className="space-y-10 w-full">
@@ -1101,7 +1109,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-10 w-full">
         <div className="w-72 h-96 border-[10px] shadow-[20px_20px_0_#ff0055]" style={{ borderColor: currentTheme.colors.accent }}>
-          <img src={pastorImage} className="w-full h-full object-cover object-center contrast-150 brightness-110" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center contrast-150 brightness-110" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="space-y-8 w-full">
           <div className="font-display text-[12rem] font-black leading-none opacity-20" style={{ color: currentTheme.colors.accent }}>{data.day}</div>
@@ -1134,7 +1142,7 @@ function App() {
       </div>
       <div className="space-y-12">
         <div className="w-48 h-48 rounded-full overflow-hidden grayscale opacity-80 mx-auto">
-          <img src={pastorImage} className="w-full h-full object-cover object-center" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center" style={pastorImageStyle} alt="Pastor" />
         </div>
         <div className="space-y-4">
           <div className="font-telugu text-4xl font-light tracking-widest">{data.pastorName}</div>
@@ -1173,7 +1181,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center gap-10 w-full">
         <div className="w-full h-96 border-[16px] border-zinc-800 relative">
-          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale contrast-125" alt="Pastor" />
+          <img src={pastorImage} className="w-full h-full object-cover object-center grayscale contrast-125" style={pastorImageStyle} alt="Pastor" />
           <div className="absolute top-6 right-6 bg-black/80 px-6 py-3 font-display text-sm tracking-widest" style={{ color: currentTheme.colors.accent }}>PRT_01</div>
         </div>
         <div className="space-y-8 w-full">
@@ -1345,6 +1353,62 @@ function App() {
                 <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
                 <button onClick={() => fileInputRef.current?.click()} className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-sm text-zinc-400 hover:text-gold-bright hover:border-gold-bright transition-all flex items-center justify-center gap-2">
                   <RefreshCw size={14} /> Change Portrait
+                </button>
+              </div>
+
+              <div className="space-y-4 pt-2 border-t border-white/5">
+                <div className="space-y-2">
+                  <label className="flex items-center justify-between text-[10px] uppercase tracking-widest text-gold-muted font-display">
+                    <span>Portrait Zoom</span>
+                    <span className="text-gold-bright">{Math.round(data.pastorImageScale * 100)}%</span>
+                  </label>
+                  <input
+                    type="range"
+                    min="0.5"
+                    max="3"
+                    step="0.01"
+                    value={data.pastorImageScale}
+                    onChange={(e) => setData(prev => ({ ...prev, pastorImageScale: parseFloat(e.target.value) }))}
+                    className="w-full h-1.5 bg-white/5 rounded-lg appearance-none cursor-pointer accent-gold-bright"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="flex items-center justify-between text-[10px] uppercase tracking-widest text-gold-muted font-display">
+                      <span>Move X</span>
+                      <span className="text-gold-bright">{data.pastorImageX}px</span>
+                    </label>
+                    <input
+                      type="range"
+                      min="-200"
+                      max="200"
+                      value={data.pastorImageX}
+                      onChange={(e) => setData(prev => ({ ...prev, pastorImageX: parseInt(e.target.value) }))}
+                      className="w-full h-1.5 bg-white/5 rounded-lg appearance-none cursor-pointer accent-gold-bright"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="flex items-center justify-between text-[10px] uppercase tracking-widest text-gold-muted font-display">
+                      <span>Move Y</span>
+                      <span className="text-gold-bright">{data.pastorImageY}px</span>
+                    </label>
+                    <input
+                      type="range"
+                      min="-200"
+                      max="200"
+                      value={data.pastorImageY}
+                      onChange={(e) => setData(prev => ({ ...prev, pastorImageY: parseInt(e.target.value) }))}
+                      className="w-full h-1.5 bg-white/5 rounded-lg appearance-none cursor-pointer accent-gold-bright"
+                    />
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => setData(prev => ({ ...prev, pastorImageScale: 1, pastorImageX: 0, pastorImageY: 0 }))}
+                  className="w-full py-1.5 text-[10px] uppercase tracking-widest text-zinc-500 hover:text-white transition-colors border border-white/5 rounded"
+                >
+                  Reset Alignment
                 </button>
               </div>
             </div>
